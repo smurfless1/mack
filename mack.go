@@ -19,7 +19,7 @@ import (
 
 // Build the AppleScript command from a set of optional parameters, return the output
 func run(command string) (string, error) {
-	cmd := exec.Command("osascript", "-e", command)
+	cmd := exec.Command("osascript", "-s", "s", "-e", command)
 	output, err := cmd.CombinedOutput()
 	prettyOutput := strings.Replace(string(output), "\n", "", -1)
 
