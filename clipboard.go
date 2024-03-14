@@ -7,7 +7,9 @@ package mack
 
 // Clipboard returns the content of the clipboard
 func Clipboard() (string, error) {
-	return run(buildClipboard())
+	str, err := run(buildClipboard())
+	// de-quote it on return
+	return str[1 : len(str)-1], err
 }
 
 // Build the command
