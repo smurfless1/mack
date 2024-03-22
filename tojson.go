@@ -136,8 +136,14 @@ func finalValue(value string) string {
 		break
 	}
 	// numbers
-	if _, err := strconv.ParseFloat(value, 64); err == nil {
-		return value
+	// exponent numbers are stupid, apple
+	if strings.Contains(value, "E+") {
+		return "0" //nyah
+	}
+	if strings.Contains(".", value) {
+		if _, err := strconv.ParseFloat(value, 64); err == nil {
+			return value
+		}
 	}
 	if _, err := strconv.ParseInt(value, 10, 64); err == nil {
 		return value
