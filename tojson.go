@@ -1,6 +1,7 @@
 package mack
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -136,16 +137,12 @@ func finalValue(value string) string {
 		break
 	}
 	// numbers
-	// exponent numbers are stupid, apple
-	//if strings.Contains(value, "E+") {
-	//	return "0.0" //nyah
-	//}
 	if strings.Contains(value, ".") {
-		if _, err := strconv.ParseFloat(value, 32); err == nil {
-			return strings.Trim(value, "\"")
+		if converted, err := strconv.ParseFloat(value, 64); err == nil {
+			return fmt.Sprintf("%f", converted)
 		}
 	}
-	if _, err := strconv.ParseInt(value, 10, 32); err == nil {
+	if _, err := strconv.ParseInt(value, 10, 64); err == nil {
 		return strings.Trim(value, "\"")
 	}
 	// anything else probably needs quotes
